@@ -1,0 +1,5 @@
+MONGO_USER = 'passepartout_db_user'
+MONGO_PASS = 'p4ss3p4rtout_db_us3r'
+MONGO_URL = 'candidate.14.mongolayer.com:10871,candidate.13.mongolayer.com:11016/passepartout_db?replicaSet=set-5568fa83e27794fa9c001d87'
+MONGO_DB = 'passepartout_db'
+MONGO_DB_COLLECTION = 'tabs'
