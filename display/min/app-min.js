@@ -1,0 +1,1 @@
+$(document).ready(function(){db.setup(),display.setup("#displayoverlay")});

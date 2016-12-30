@@ -1,0 +1,1 @@
+display={},display.setup=function(i){console.log("setting display"),display.id=i,window.setInterval(display.play_next,3e3)},display.play_next=function(){return"undefined"==typeof db.playlist?-1:void 0};

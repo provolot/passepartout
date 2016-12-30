@@ -19,7 +19,7 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def index():
-    return 'Hi! use either: /play_next or /play_piece_now or /queue_piece or /set_playlist'
+    return 'Hi! use either: /get_current or /play_next or /play_piece_now or /queue_piece or /set_playlist'
 
 ### 'playlist' is a field of a 'piece' db entry. each item has a date and an optional ordinal (as so to make ordering possible later)
 
@@ -51,6 +51,29 @@ def set_playlist():
     # do something here to set a playlist
     playlist = request.args.get('playlist')
     # send_command('/set_playlist '+ playlist)
+
+@app.route('/_get_current')
+def _get_current():
+    # get the most recent piece, given playlist
+    playlist = request.args.get('playlist')
+    print playlist  
+    if (playlist):
+
+        mongo_pieces = mongo.db[settings.MONGO_DB_COLLECTION]
+
+        try:
+            # sort in descending order by date/time, so that  we get the most recent
+            pieces = mongo_pieces.find({"playlist": playlist}).sort('ordinal',pymongo.DESCENDING).sort('datetime',pymongo.DESCENDING).limit(1)
+
+            playlist = [piece_to_dict(piece) for piece in pieces]
+            print playlist
+            return jsonify(playlist)
+        except Exception, e:
+            print "error:"
+            return "error:" + str(e)
+
+    else:
+        return "error: no playlist"
 
 
 ####### PRIVATE ENDPOINTS & HELPER FUNCTS
