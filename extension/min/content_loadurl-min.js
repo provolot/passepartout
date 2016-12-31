@@ -1,1 +1,0 @@
-chrome.extension.onMessage.addListener(function(o,n,e){console.log(o.url);var l=o.url;console.log(l),window.location.href!==o.url&&(console.log(l),window.location=l)}),$(document).ready(function(){console.log("content_loadurl.js")});
