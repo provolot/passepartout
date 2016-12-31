@@ -14,8 +14,6 @@ var urlsAreDifferent = function(url1, url2) {
     var regExp = /http(s)?:\/\/(.*)/;
 	var url1clean = url1.match(regExp)[2];
 	var url2clean = url2.match(regExp)[2];
-    console.log(url1clean);
-    console.log(url2clean);
     if(url1clean.localeCompare(url2clean)) {
         return true; // localecompare returns non-zero if different
     } else {
