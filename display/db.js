@@ -1,17 +1,28 @@
 db = {};
+
 db.playlist = [];
 db.playlist_cursor = 0;
 
-var playlist_url = "http://localhost:5000/_get_playlist?playlist=testlist2";
+db.API_URL = "http://localhost:5000/";
+db.CURRENT_URL = "get_current";
+db.PLAYLIST_URL = "get_playlist";
 
-db.setup = function() {
-    console.log("setting db");
+db.setup = function(opts) {
+    console.log("setup db");
+    Object.assign(db, opts)
     window.setInterval(db.update_playlist, 10000);
+}
+
+db.getCurrentUrl = function(callback) {
+    console.log("updating playlist")
+    $.get(db.API_URL + db.CURRENT_URL + "?playlist=" + db.PLAYLIST, function( data ) {
+        callback(data[0]);
+    });
 }
 
 db.update_playlist = function() {
     console.log("updating playlist")
-    $.get(playlist_url, function( data ) {
+    $.get(db.API_URL + db.PLAYLIST_URL + "?playlist=" + db.PLAYLIST, function( data ) {
         db.playlist = data;
         console.log(data);
     });

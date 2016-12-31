@@ -13,6 +13,7 @@
 			#displayoverlay {
 				z-index: 100;
 				pointer-events:none;
+                    opacity: 0;
 			}
             .fullframe {
                 position:absolute; left: 0; right: 0; bottom: 0; top: 0px; 
@@ -23,7 +24,7 @@
 		<div id="displayoverlay" class="fullframe">
 		</div>
         <div id="displayframe" class="fullframe">
-            <iframe width="100%" height="100%" frameborder="0" src="http://i.imgur.com/pLzDsQU.jpg" />
+            <iframe id="displayiframe" width="100%" height="100%" frameborder="0" src="http://i.imgur.com/pLzDsQU.jpg" />
         </div>
     </body>
 </html>

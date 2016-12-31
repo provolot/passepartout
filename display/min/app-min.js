@@ -1,1 +1,1 @@
-$(document).ready(function(){db.setup(),display.setup("#displayoverlay")});
+$(document).ready(function(){db.setup({PLAYLIST:"testlist2"}),display.setup("#displayiframe"),window.setInterval(function(){console.log("hooo"),db.getCurrentUrl(function(r){db.currentUrl!=r.url&&(db.currentUrl=r.url,display.setUrl(db.currentUrl))})},3e3)});

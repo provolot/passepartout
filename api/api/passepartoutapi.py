@@ -52,8 +52,8 @@ def set_playlist():
     playlist = request.args.get('playlist')
     # send_command('/set_playlist '+ playlist)
 
-@app.route('/_get_current')
-def _get_current():
+@app.route('/get_current')
+def get_current():
     # get the most recent piece, given playlist
     playlist = request.args.get('playlist')
     print playlist  
