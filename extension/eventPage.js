@@ -6,7 +6,6 @@ db.API_URL = "http://vps.provolot.com/manila_api/";
 db.API_CURRENT_URL = "get_tab";
 db.PLAYLIST_URL = "get_playlist";
 db.PLAYLIST = "surfclub";
-db.current_url = "";
 
 // Called when the user clicks on the browser action.
 chrome.browserAction.onClicked.addListener(function(tab) {
@@ -21,16 +20,12 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 
 
 
-var onChangeLoadPage = function(url) {
+var onUrlSendMessage = function(url) {
     console.log("### loading " + url + "###");
 
 	chrome.tabs.query({active: true}, function(tabs) {
 
-/*		chrome.tabs.executeScript(tabs[0].id, {
-			code: 'window.location = "' + url + '";'
-		});
-*/
-		console.log("sending message");
+		console.log("sending message to active tab:" + tabs[0].id);
 		chrome.tabs.sendMessage(tabs[0].id, {
 			url: url
 		});
@@ -40,17 +35,13 @@ var onChangeLoadPage = function(url) {
 }
 
 
-var checkIfNewUrl = function(onChange) {
+var getCurrentUrl = function(onGet) {
     console.log("## checking if new url");
     $.ajax({
         url: db.API_URL + db.API_CURRENT_URL + "?tabroom=" + db.PLAYLIST,
         success: function(response) {
             console.log("url received..:" + response['url']);
-            if(db.current_url != response['url']) {
-                console.log("new url!");
-				onChange(response['url']);
-                db.current_url = response['url'];
-            }
+            onGet(response['url']);
         },
         error: function(xhr) {  console.log('FAILURE');    }
     });
@@ -62,11 +53,11 @@ $( document ).ready(function() {
     console.log("WOWOWO document ready");
 //    chrome.alarms.create("myAlarm", {delayInMinutes: 0.0, periodInMinutes: 0.05} );
     window.setInterval(function() {
-		checkIfNewUrl(onChangeLoadPage);
-	}, 5000);
+		getCurrentUrl(onUrlSendMessage);
+	}, 10000);
 });
 
 chrome.alarms.onAlarm.addListener(function( alarm ) {
-    checkIfNewUrl(onChangeLoadPage);
+//    getCurrentUrl(onUrlSendMessage);
 });
 
