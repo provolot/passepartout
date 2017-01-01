@@ -1,6 +1,8 @@
 # passepartout
+![img](https://raw.githubusercontent.com/stoloniferous/passepartout/master/extension/icons/icon_large.png)
 
 (lib for magic box control)
+
 
 **extension/** is a chrom(e/ium) extension that polls the db and changes the current tab.
 - connects to api via polling every 1 min
