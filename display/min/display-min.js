@@ -1,1 +1,0 @@
-display={},display.setup=function(l){console.log("setup display"),display.id=l,window.setInterval(display.play_next,3e3)},display.setUrl=function(l){console.log("setting url to "+l),$(display.id).attr("src",l)},display.play_next=function(){return"undefined"==typeof db.playlist?-1:void 0};
