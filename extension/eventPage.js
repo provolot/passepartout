@@ -43,7 +43,7 @@ var getCurrentUrl = function(onGet) {
 
 $( document ).ready(function() {
     console.log("WOWOWO document ready");
-    chrome.alarms.create("myAlarm", {delayInMinutes: 0.0, periodInMinutes: 0.05} );
+    chrome.alarms.create("myAlarm", {delayInMinutes: 0.0, periodInMinutes: 1} );
 });
 
 chrome.alarms.onAlarm.addListener(function( alarm ) {
