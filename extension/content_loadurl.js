@@ -1,5 +1,7 @@
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+    console.log("received message!");
+    console.log(request);
 	var url = request.url;
     url = videoToEmbed(url);
 
