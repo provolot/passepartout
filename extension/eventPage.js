@@ -16,7 +16,7 @@ var isEnabled = false;
 var onUrlSendMessage = function(url) {
     console.log("### loading " + url + "###");
 
-	chrome.tabs.query({active: true}, function(tabs) {
+	chrome.tabs.query({'index':0}, function(tabs) {
 		console.log("sending message to active tab:" + tabs[0].id);
 		chrome.tabs.sendMessage(tabs[0].id, {
 			url: url
@@ -40,11 +40,13 @@ var getCurrentUrl = function(onGet) {
 }
 
 
-
-$( document ).ready(function() {
-    console.log("WOWOWO document ready");
+var startAlarm = function() {
     chrome.alarms.create("myAlarm", {delayInMinutes: 0.0, periodInMinutes: 1} );
-});
+    /*window.setInterval(function() {
+        getCurrentUrl(onUrlSendMessage);
+    }, 15000); */
+}
+
 
 chrome.alarms.onAlarm.addListener(function( alarm ) {
     getCurrentUrl(onUrlSendMessage);
@@ -60,5 +62,13 @@ chrome.browserAction.onClicked.addListener(function(tab) {
       chrome.browserAction.setIcon({path: "icons/icon.png"});
       getCurrentUrl(onUrlSendMessage);
   }
+});
+
+////////////////////////
+
+$( document ).ready(function() {
+    console.log("WOWOWO document ready");
+
+    startAlarm();
 });
 
